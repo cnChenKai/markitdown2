@@ -28,7 +28,9 @@ jobs:
       run: |
         mkdir -p ~/.android
         echo "count=0" > ~/.android/repositories.cfg
-        yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses
+        # Wait for SDK to be ready and accept licenses
+        sleep 10
+        yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses || true
 
     - name: Install MarkItDown
       run: |
