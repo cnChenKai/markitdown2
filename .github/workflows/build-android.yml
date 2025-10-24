@@ -32,6 +32,11 @@ jobs:
         sleep 10
         yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses || true
 
+    - name: Install Android build tools
+      run: |
+        $ANDROID_SDK_ROOT/tools/bin/sdkmanager "build-tools;33.0.2" --sdk_root=$ANDROID_SDK_ROOT
+        yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses
+
     - name: Install MarkItDown
       run: |
         cd packages/markitdown
@@ -45,6 +50,14 @@ jobs:
         buildozer android debug
 
     - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: markitdown-android-apk
+        path: bin/*.apk    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: markitdown-android-apk
+        path: bin/*.apk
       uses: actions/upload-artifact@v4
       with:
         name: markitdown-android-apk
