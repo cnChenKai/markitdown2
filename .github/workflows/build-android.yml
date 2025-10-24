@@ -28,6 +28,7 @@ jobs:
       run: |
         cd packages/markitdown
         pip install -e .[all]
+        cd ..
 
     - name: Build APK
       run: |
